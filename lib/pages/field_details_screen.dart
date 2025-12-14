@@ -113,16 +113,6 @@ class _FieldDetailsScreenState extends State<FieldDetailsScreen> {
             ),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.edit_outlined),
-            onPressed: () {
-              setState(() {
-                _showNDVIOptions = !_showNDVIOptions;
-              });
-            },
-          ),
-        ],
       ),
       body: Column(
         children: [
@@ -327,8 +317,9 @@ class _FieldDetailsScreenState extends State<FieldDetailsScreen> {
               onPressed: () {
                 mapController.move(_fieldCenter, 14.0);
               },
-              backgroundColor: const Color(0xFF3498DB),
-              child: const Icon(Icons.my_location),
+              foregroundColor: Theme.of(context).primaryIconTheme.color,
+              backgroundColor: Theme.of(context).primaryColor.withValues(alpha: 0.6),
+              child: Icon(Icons.my_location,),
             ),
           if (!_showNDVIOptions && !_showDetails)
             const SizedBox(height: 16),
@@ -339,7 +330,7 @@ class _FieldDetailsScreenState extends State<FieldDetailsScreen> {
                   _showNDVIOptions = true;
                 });
               },
-              backgroundColor: const Color(0xFF2ECC71),
+              backgroundColor: const Color(0xFF2ECC71).withValues(alpha: 0.6),
               child: const Icon(Icons.map_outlined),
             ),
         ],
@@ -351,7 +342,7 @@ class _FieldDetailsScreenState extends State<FieldDetailsScreen> {
   // остаются без изменений
   Widget _buildNDVIControlPanel(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.fromLTRB(12,12,12,112,),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -553,7 +544,7 @@ class _FieldDetailsScreenState extends State<FieldDetailsScreen> {
     final currentColor = zoneColors[_selectedZone - 1];
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16,16,16,112),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
