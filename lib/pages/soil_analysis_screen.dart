@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:agromax/l10n/app_localizations.dart' as l10n;
 
 class SoilAnalysisScreen extends StatelessWidget {
   const SoilAnalysisScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final s = l10n.AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.transparent, // Make scaffold transparent
       appBar: AppBar(

@@ -1,11 +1,12 @@
-import 'package:agromax/controllers/dashboard_tab_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:agromax/l10n/app_localizations.dart' as l10n;
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final s = l10n.AppLocalizations.of(context)!;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),

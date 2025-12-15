@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:agromax/services/pest_disease_analysis_service.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+import 'package:agromax/l10n/app_localizations.dart' as l10n;
 
 class FieldDetailsScreen extends StatefulWidget {
   const FieldDetailsScreen({super.key});
@@ -819,6 +820,7 @@ class _FieldDetailsScreenState extends State<FieldDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final s = l10n.AppLocalizations.of(context)!;
     return Scaffold(
       body: Column(
         children: [

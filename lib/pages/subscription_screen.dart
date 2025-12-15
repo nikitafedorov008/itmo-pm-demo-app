@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:agromax/l10n/app_localizations.dart' as l10n;
 
 class SubscriptionScreen extends StatelessWidget {
   const SubscriptionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final s = l10n.AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.transparent, // Make scaffold transparent
       body: Center(

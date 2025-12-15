@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:agromax/providers/pest_disease_notifier.dart';
 import 'package:agromax/models/pest_disease_model.dart';
+import 'package:agromax/l10n/app_localizations.dart' as l10n;
 
 class PestDiseaseScreen extends StatefulWidget {
   const PestDiseaseScreen({super.key});
@@ -14,6 +15,7 @@ class PestDiseaseScreen extends StatefulWidget {
 class _PestDiseaseScreenState extends State<PestDiseaseScreen> {
   @override
   Widget build(BuildContext context) {
+    final s = l10n.AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.transparent, // Make scaffold transparent
       appBar: AppBar(

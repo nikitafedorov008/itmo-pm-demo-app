@@ -1,13 +1,10 @@
-import 'package:agromax/controllers/dashboard_tab_notifier.dart';
 import 'package:agromax/pages/agricultural_dashboard_screen.dart';
-import 'package:agromax/pages/experiments_screen.dart';
 import 'package:agromax/pages/field_details_screen.dart';
-import 'package:agromax/pages/growth_screen.dart';
 import 'package:agromax/pages/home_screen.dart';
 import 'package:agromax/pages/plant_health_screen.dart';
-import 'package:agromax/pages/subscription_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:agromax/l10n/app_localizations.dart' as l10n;
 
 class MainDashboardScreen extends StatefulWidget {
   const MainDashboardScreen({super.key});
@@ -28,6 +25,7 @@ class _MainDashboardScreenState extends State<MainDashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final s = l10n.AppLocalizations.of(context)!;
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
