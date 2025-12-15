@@ -11,7 +11,7 @@ class AgriculturalDashboardScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
-          'Agricultural Tools',
+          'Personal',
           style: GoogleFonts.montserrat(
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -26,6 +26,21 @@ class AgriculturalDashboardScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Profile widget before Agricultural Tools
+              _buildProfileCard(context),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16.0,
+                ),
+                child: Text(
+                  'Quick Access',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: const Color(0xFF2C3E50),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+
               // Soil Analysis Card
               _buildFeatureCard(
                 context,
@@ -72,7 +87,9 @@ class AgriculturalDashboardScreen extends StatelessWidget {
                 subtitle: 'Calculate optimal fertilizer amounts',
                 icon: Icons.calculate_outlined,
                 color: const Color(0xFF3498DB),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, '/fertilizer-calculator');
+                },
               ),
               const SizedBox(height: 16),
 
@@ -83,12 +100,119 @@ class AgriculturalDashboardScreen extends StatelessWidget {
                 subtitle: 'Plan and manage irrigation schedules',
                 icon: Icons.water_drop_outlined,
                 color: const Color(0xFF2ECC71),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, '/irrigation-scheduler');
+                },
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildProfileCard(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: const Color(0xFFE8F6EF),
+              border: Border.all(color: const Color(0xFF2ECC71)),
+            ),
+            child: const Icon(
+              Icons.person_outlined,
+              color: Color(0xFF2ECC71),
+              size: 30,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Demo User',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xFF2C3E50),
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Farmer, Agrofirm "Vyborgets"',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: const Color(0xFF7F8C8D),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    _buildProfileStat('12', 'Fields', Icons.agriculture_outlined),
+                    const SizedBox(width: 16),
+                    _buildProfileStat('450', 'Ha', Icons.straighten_outlined),
+                    const SizedBox(width: 16),
+                    _buildProfileStat('3', 'Crops', Icons.eco_outlined),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.settings_outlined,
+              color: const Color(0xFF3498DB),
+            ),
+            onPressed: () {
+              // Navigate to profile settings
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProfileStat(String value, String label, IconData icon) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(
+          icon,
+          size: 14,
+          color: const Color(0xFF7F8C8D),
+        ),
+        const SizedBox(width: 4),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: const Color(0xFF2C3E50),
+          ),
+        ),
+        Text(
+          ' $label',
+          style: TextStyle(
+            fontSize: 10,
+            color: const Color(0xFF7F8C8D),
+          ),
+        ),
+      ],
     );
   }
 
