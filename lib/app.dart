@@ -1,11 +1,15 @@
+import 'package:agromax/pages/agricultural_dashboard_screen.dart';
+import 'package:agromax/pages/crop_rotation_screen.dart';
 import 'package:agromax/pages/experiments_screen.dart';
 import 'package:agromax/pages/field_details_screen.dart';
 import 'package:agromax/pages/growth_screen.dart';
 import 'package:agromax/pages/main_dashboard_screen.dart';
+import 'package:agromax/pages/pest_disease_screen.dart';
 import 'package:agromax/pages/plant_health_screen.dart';
+import 'package:agromax/pages/soil_analysis_screen.dart';
 import 'package:agromax/pages/subscription_screen.dart';
-import 'package:agromax/pages/weather_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AgroMaxApp extends StatelessWidget {
@@ -17,10 +21,13 @@ class AgroMaxApp extends StatelessWidget {
       title: 'AgroMax Demo',
       theme: ThemeData(
         primarySwatch: Colors.green,
-        scaffoldBackgroundColor: const Color(0xFFF5F7FA),
+        scaffoldBackgroundColor: Colors.transparent, // Changed to transparent for gradient
         textTheme: GoogleFonts.montserratTextTheme(),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarBrightness: Brightness.light,
+          ),
+          backgroundColor: Colors.transparent, // Changed for transparency
           elevation: 0,
           iconTheme: IconThemeData(color: Colors.black),
           titleTextStyle: TextStyle(
@@ -38,14 +45,32 @@ class AgroMaxApp extends StatelessWidget {
         ),
       ),
       home: const MainDashboardScreen(),
+      builder: (context, child) => DecoratedBox(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFFE8F5E8), // Light green
+              Color(0xFFE0F7FA), // Light blue/cyan
+              Color(0xFFFFF8E1), // Light beige
+            ],
+            stops: [0.0, 0.5, 1.0],
+          ),
+        ),
+        child: child,
+      ),
       routes: {
-        '/weather': (context) => const WeatherScreen(),
         '/plant-health': (context) => const PlantHealthScreen(),
         '/field-details': (context) => const FieldDetailsScreen(),
         '/subscription': (context) => const SubscriptionScreen(),
         '/growth': (context) => const GrowthScreen(),
         '/experiments': (context) => const ExperimentsScreen(),
         '/dashboard': (context) => const MainDashboardScreen(),
+        '/soil-analysis': (context) => const SoilAnalysisScreen(),
+        '/pest-disease': (context) => const PestDiseaseScreen(),
+        '/crop-rotation': (context) => const CropRotationScreen(),
+        '/agricultural-dashboard': (context) => const AgriculturalDashboardScreen(),
       },
     );
   }

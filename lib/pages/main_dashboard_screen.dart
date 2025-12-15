@@ -1,7 +1,10 @@
+import 'package:agromax/pages/agricultural_dashboard_screen.dart';
+import 'package:agromax/pages/experiments_screen.dart';
 import 'package:agromax/pages/field_details_screen.dart';
+import 'package:agromax/pages/growth_screen.dart';
 import 'package:agromax/pages/home_screen.dart';
 import 'package:agromax/pages/plant_health_screen.dart';
-import 'package:agromax/pages/weather_screen.dart';
+import 'package:agromax/pages/subscription_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,9 +20,9 @@ class _MainDashboardScreenState extends State<MainDashboardScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const WeatherScreen(),
     const PlantHealthScreen(),
     const FieldDetailsScreen(),
+    const AgriculturalDashboardScreen(),
   ];
 
   @override
@@ -38,8 +41,23 @@ class _MainDashboardScreenState extends State<MainDashboardScreen> {
             onPressed: () {},
           ),
         ],
+        backgroundColor: Colors.transparent, // Keep app bar transparent over gradient
       ),
-      body: _screens[_currentIndex],
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFFE8F5E8), // Light green
+              Color(0xFFE0F7FA), // Light blue/cyan
+              Color(0xFFFFF8E1), // Light beige
+            ],
+            stops: [0.0, 0.5, 1.0],
+          ),
+        ),
+        child: _screens[_currentIndex],
+      ),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
@@ -74,32 +92,24 @@ class _MainDashboardScreenState extends State<MainDashboardScreen> {
                 index: 0,
               ),
 
-              // Weather button
-              _buildCustomNavItem(
-                icon: Icons.cloud_outlined,
-                activeIcon: Icons.cloud,
-                index: 1,
-              ),
-
-              // Center FAB button - empty space for the FAB
-              // Plant button
-              // _buildCustomNavItem(
-              //   icon: Icons.add_circle_outline,
-              //   activeIcon: Icons.add_circle,
-              //   index: 2,
-              // ),
-
               // Plant button
               _buildCustomNavItem(
                 icon: Icons.eco_outlined,
                 activeIcon: Icons.eco,
-                index: 2,
+                index: 1,
               ),
 
               // Field button
               _buildCustomNavItem(
                 icon: Icons.map_outlined,
                 activeIcon: Icons.map,
+                index: 2,
+              ),
+
+              // Agricultural tools button
+              _buildCustomNavItem(
+                icon: Icons.agriculture_outlined,
+                activeIcon: Icons.agriculture,
                 index: 3,
               ),
             ],
@@ -161,6 +171,7 @@ class _MainDashboardScreenState extends State<MainDashboardScreen> {
       case 1: return 'Weather';
       case 2: return 'Plant';
       case 3: return 'Field';
+      case 4: return 'Tools';
       default: return 'Home';
     }
   }

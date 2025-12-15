@@ -6,6 +6,7 @@ class SubscriptionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent, // Make scaffold transparent
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

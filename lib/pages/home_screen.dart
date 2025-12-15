@@ -1,329 +1,403 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen();
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Upcoming meetings section
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'No upcoming meetings',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: const Color(0xFF2C3E50),
-                        fontWeight: FontWeight.w600,
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            spacing: 16.0,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Upcoming meetings section
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'No upcoming meetings',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: const Color(0xFF2C3E50),
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.calendar_today_outlined,
-                        color: Color(0xFF3498DB),
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.calendar_today_outlined,
+                          color: Color(0xFF3498DB),
+                        ),
+                        onPressed: () {},
                       ),
                     ],
                   ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 4,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF3498DB),
-                              borderRadius: BorderRadius.circular(2),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Team Meeting',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF2C3E50),
-                                ),
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: 4,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF3498DB),
+                                borderRadius: BorderRadius.circular(2),
                               ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'Today, 10:00 AM',
+                            ),
+                            const SizedBox(width: 12),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Team Meeting',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFF2C3E50),
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'Today, 10:00 AM',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
+                                    color: const Color(0xFF7F8C8D),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFE3F2FD),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                'Online',
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall
                                     ?.copyWith(
-                                  color: const Color(0xFF7F8C8D),
+                                  color: const Color(0xFF3498DB),
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
-                            ],
-                          ),
-                          const Spacer(),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFE3F2FD),
-                              borderRadius: BorderRadius.circular(12),
                             ),
-                            child: Text(
-                              'Online',
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              // Quick access section
+              Text(
+                'Quick Access',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: const Color(0xFF2C3E50),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              SizedBox(
+                height: 120,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    _buildQuickAccessCard(
+                      context,
+                      icon: Icons.map_outlined,
+                      title: 'Details Field',
+                      color: const Color(0xFF3498DB),
+                      onTap: () {},
+                    ),
+                    _buildQuickAccessCard(
+                      context,
+                      icon: Icons.auto_graph_outlined,
+                      title: 'Growth',
+                      color: const Color(0xFF2ECC71),
+                      onTap: () {},
+                    ),
+                    _buildQuickAccessCard(
+                      context,
+                      icon: Icons.science_outlined,
+                      title: 'Experiments',
+                      color: const Color(0xFF9B59B6),
+                      onTap: () {},
+                    ),
+                    _buildQuickAccessCard(
+                      context,
+                      icon: Icons.analytics_outlined,
+                      title: 'Weekly Insights',
+                      color: const Color(0xFFF39C12),
+                      onTap: () {},
+                    ),
+                    _buildQuickAccessCard(
+                      context,
+                      icon: Icons.local_florist_outlined,
+                      title: 'Soil Analysis',
+                      color: const Color(0xFF9B59B6),
+                      onTap: () {
+                        Navigator.pushNamed(context, '/soil-analysis');
+                      },
+                    ),
+                    _buildQuickAccessCard(
+                      context,
+                      icon: Icons.bug_report_outlined,
+                      title: 'Pest Control',
+                      color: const Color(0xFFE67E22),
+                      onTap: () {
+                        Navigator.pushNamed(context, '/pest-disease');
+                      },
+                    ),
+                    _buildQuickAccessCard(
+                      context,
+                      icon: Icons.rotate_right_outlined,
+                      title: 'Crop Rotation',
+                      color: const Color(0xFF1ABC9C),
+                      onTap: () {
+                        Navigator.pushNamed(context, '/crop-rotation');
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              // Recent activities section
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Recent Activities',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: const Color(0xFF2C3E50),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFF8F9FA),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: const Color(0xFFE9ECEF),
+                                  width: 1,
+                                ),
+                              ),
+                              child: const Icon(
+                                Icons.edit_outlined,
+                                color: Color(0xFF3498DB),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Field Report Updated',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFF2C3E50),
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'Updated NDVI analysis for Field #3',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
+                                    color: const Color(0xFF7F8C8D),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            Text(
+                              '2h ago',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall
                                   ?.copyWith(
-                                color: const Color(0xFF3498DB),
-                                fontWeight: FontWeight.w600,
+                                color: const Color(0xFF95A5A6),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                        const Divider(
+                          height: 24,
+                          thickness: 1,
+                          color: Color(0xFFECF0F1),
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFF8F9FA),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: const Color(0xFFE9ECEF),
+                                  width: 1,
+                                ),
+                              ),
+                              child: const Icon(
+                                Icons.notifications_active_outlined,
+                                color: Color(0xFF2ECC71),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Weather Alert',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFF2C3E50),
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'Heavy rain expected tomorrow',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
+                                    color: const Color(0xFF7F8C8D),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            Text(
+                              '5h ago',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
+                                color: const Color(0xFF95A5A6),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-
-          // Quick access section
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              'Quick Access',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: const Color(0xFF2C3E50),
-                fontWeight: FontWeight.w600,
+                ],
               ),
-            ),
+              Text(
+                'Agricultural Tools',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: const Color(0xFF2C3E50),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              // Soil Analysis Card
+              _buildFeatureCard(
+                context,
+                title: 'Soil Analysis',
+                subtitle: 'Analyze soil composition and nutrients',
+                icon: Icons.local_florist_outlined,
+                color: const Color(0xFF9B59B6),
+                onTap: () {
+                  Navigator.pushNamed(context, '/soil-analysis');
+                },
+              ),
+              // Pest & Disease Card
+              _buildFeatureCard(
+                context,
+                title: 'Pest & Disease',
+                subtitle: 'Detect and manage crop pests',
+                icon: Icons.bug_report_outlined,
+                color: const Color(0xFFE67E22),
+                onTap: () {
+                  Navigator.pushNamed(context, '/pest-disease');
+                },
+              ),
+              // Crop Rotation Card
+              _buildFeatureCard(
+                context,
+                title: 'Crop Rotation',
+                subtitle: 'Plan sustainable crop rotation',
+                icon: Icons.rotate_right_outlined,
+                color: const Color(0xFF1ABC9C),
+                onTap: () {
+                  Navigator.pushNamed(context, '/crop-rotation');
+                },
+              ),
+              // Fertilizer Calculator Card
+              _buildFeatureCard(
+                context,
+                title: 'Fertilizer Calculator',
+                subtitle: 'Calculate optimal fertilizer amounts',
+                icon: Icons.calculate_outlined,
+                color: const Color(0xFF3498DB),
+                onTap: () {},
+              ),
+              // Irrigation Scheduler Card
+              _buildFeatureCard(
+                context,
+                title: 'Irrigation Scheduler',
+                subtitle: 'Plan and manage irrigation schedules',
+                icon: Icons.water_drop_outlined,
+                color: const Color(0xFF2ECC71),
+                onTap: () {},
+              ),
+              SizedBox(
+                height: 120,
+              ),
+            ],
           ),
-          const SizedBox(height: 12),
-          SizedBox(
-            height: 120,
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              scrollDirection: Axis.horizontal,
-              children: [
-                _buildQuickAccessCard(
-                  context,
-                  icon: Icons.map_outlined,
-                  title: 'Details Field',
-                  color: const Color(0xFF3498DB),
-                  onTap: () {},
-                ),
-                _buildQuickAccessCard(
-                  context,
-                  icon: Icons.auto_graph_outlined,
-                  title: 'Growth',
-                  color: const Color(0xFF2ECC71),
-                  onTap: () {},
-                ),
-                _buildQuickAccessCard(
-                  context,
-                  icon: Icons.science_outlined,
-                  title: 'Experiments',
-                  color: const Color(0xFF9B59B6),
-                  onTap: () {},
-                ),
-                _buildQuickAccessCard(
-                  context,
-                  icon: Icons.analytics_outlined,
-                  title: 'Weekly Insights',
-                  color: const Color(0xFFF39C12),
-                  onTap: () {},
-                ),
-                _buildQuickAccessCard(
-                  context,
-                  icon: Icons.group_outlined,
-                  title: 'Create a Room',
-                  color: const Color(0xFFE74C3C),
-                  onTap: () {},
-                ),
-              ],
-            ),
-          ),
-
-          // Recent activities section
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Recent Activities',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: const Color(0xFF2C3E50),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFF8F9FA),
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: const Color(0xFFE9ECEF),
-                                width: 1,
-                              ),
-                            ),
-                            child: const Icon(
-                              Icons.edit_outlined,
-                              color: Color(0xFF3498DB),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Field Report Updated',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF2C3E50),
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'Updated NDVI analysis for Field #3',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                  color: const Color(0xFF7F8C8D),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          Text(
-                            '2h ago',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(
-                              color: const Color(0xFF95A5A6),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Divider(
-                        height: 24,
-                        thickness: 1,
-                        color: Color(0xFFECF0F1),
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFF8F9FA),
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: const Color(0xFFE9ECEF),
-                                width: 1,
-                              ),
-                            ),
-                            child: const Icon(
-                              Icons.notifications_active_outlined,
-                              color: Color(0xFF2ECC71),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Weather Alert',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF2C3E50),
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'Heavy rain expected tomorrow',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                  color: const Color(0xFF7F8C8D),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          Text(
-                            '5h ago',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(
-                              color: const Color(0xFF95A5A6),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -345,7 +419,7 @@ class HomeScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -358,7 +432,7 @@ class HomeScreen extends StatelessWidget {
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
@@ -377,6 +451,80 @@ class HomeScreen extends StatelessWidget {
               ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+  Widget _buildFeatureCard(
+      BuildContext context,
+      {
+        required String title,
+        required String subtitle,
+        required IconData icon,
+        required Color color,
+        required VoidCallback onTap,
+      }
+      ) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(
+                icon,
+                color: color,
+                size: 24,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: const Color(0xFF2C3E50),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: const Color(0xFF7F8C8D),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              size: 16,
+              color: const Color(0xFF95A5A6),
             ),
           ],
         ),

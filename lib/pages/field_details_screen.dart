@@ -89,7 +89,9 @@ class _FieldDetailsScreenState extends State<FieldDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent, // Make scaffold transparent
       appBar: AppBar(
+        backgroundColor: Colors.transparent, // Make app bar transparent
         centerTitle: true,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
