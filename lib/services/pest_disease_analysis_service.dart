@@ -86,7 +86,10 @@ If no pests or diseases are detected, respond with:
 
       // Parse the response
       final content = result.content as String;
-      final analysisData = jsonDecode(content);
+
+      // Extract JSON from markdown if present
+      final jsonString = _extractJsonFromMarkdown(content);
+      final analysisData = jsonDecode(jsonString);
 
       // Create the analysis result
       final analysis = PestDiseaseAnalysis.fromJson(analysisData);
@@ -153,5 +156,35 @@ If no pests or diseases are detected, respond with:
       print('Image compression failed: $e');
       return imageBytes;
     }
+  }
+
+  // Method to extract JSON from markdown if present
+  String _extractJsonFromMarkdown(String content) {
+    // Check if the content contains markdown code block with JSON
+    final jsonRegex = RegExp(r'```json\s*\n?(.*?)\n?\s*```', multiLine: true, dotAll: true);
+    final match = jsonRegex.firstMatch(content);
+
+    if (match != null) {
+      // Extract the JSON content from the markdown code block
+      return match.group(1)!.trim();
+    }
+
+    // Check for other markdown code block formats
+    final genericCodeBlockRegex = RegExp(r'```\s*\n?(.*?)\n?\s*```', multiLine: true, dotAll: true);
+    final genericMatch = genericCodeBlockRegex.firstMatch(content);
+
+    if (genericMatch != null) {
+      // Try to parse as JSON
+      try {
+        final potentialJson = genericMatch.group(1)!.trim();
+        jsonDecode(potentialJson); // This will throw if not valid JSON
+        return potentialJson;
+      } catch (e) {
+        // If it's not valid JSON, continue to return original content
+      }
+    }
+
+    // If no markdown code block found or content is not valid JSON, return original
+    return content.trim();
   }
 }
