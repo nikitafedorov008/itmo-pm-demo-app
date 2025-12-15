@@ -89,29 +89,6 @@ class _FieldDetailsScreenState extends State<FieldDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent, // Make app bar transparent
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(
-          'Field Details',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: const Color(0xFF2C3E50),
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.info_outline),
-            onPressed: () {},
-          ),
-        ],
-      ),
       body: Column(
         children: [
           // Legend header
@@ -342,9 +319,9 @@ class _FieldDetailsScreenState extends State<FieldDetailsScreen> {
             _buildZoneDetailsPanel(context),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
       floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (!_showNDVIOptions && !_showDetails)
             FloatingActionButton(

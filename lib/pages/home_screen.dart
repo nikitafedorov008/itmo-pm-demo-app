@@ -210,28 +210,36 @@ class HomeScreen extends StatelessWidget {
                       icon: Icons.map_outlined,
                       title: 'Details Field',
                       color: const Color(0xFF3498DB),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, '/details-field');
+                      },
                     ),
                     _buildQuickAccessCard(
                       context,
                       icon: Icons.auto_graph_outlined,
                       title: 'Growth',
                       color: const Color(0xFF2ECC71),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, '/growth');
+                      },
                     ),
                     _buildQuickAccessCard(
                       context,
                       icon: Icons.science_outlined,
                       title: 'Experiments',
                       color: const Color(0xFF9B59B6),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, '/experiments');
+                      },
                     ),
                     _buildQuickAccessCard(
                       context,
                       icon: Icons.analytics_outlined,
                       title: 'Weekly Insights',
                       color: const Color(0xFFF39C12),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, '/weekly-insights');
+                      },
                     ),
                     _buildQuickAccessCard(
                       context,
@@ -459,7 +467,9 @@ class HomeScreen extends StatelessWidget {
                 subtitle: 'Calculate optimal fertilizer amounts',
                 icon: Icons.calculate_outlined,
                 color: const Color(0xFF3498DB),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, '/fertilizer-calculator');
+                },
               ),
               // Irrigation Scheduler Card
               _buildFeatureCard(
@@ -468,7 +478,9 @@ class HomeScreen extends StatelessWidget {
                 subtitle: 'Plan and manage irrigation schedules',
                 icon: Icons.water_drop_outlined,
                 color: const Color(0xFF2ECC71),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, '/irrigation-scheduler');
+                },
               ),
               SizedBox(
                 height: 120,
