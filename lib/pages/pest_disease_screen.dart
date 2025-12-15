@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:agromax/providers/pest_disease_notifier.dart';
+import 'package:agromax/models/pest_disease_model.dart';
 
-class PestDiseaseScreen extends StatelessWidget {
+class PestDiseaseScreen extends StatefulWidget {
   const PestDiseaseScreen({super.key});
 
+  @override
+  State<PestDiseaseScreen> createState() => _PestDiseaseScreenState();
+}
+
+class _PestDiseaseScreenState extends State<PestDiseaseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,34 +28,80 @@ class PestDiseaseScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Camera section
-              _buildCameraCard(context),
-              const SizedBox(height: 16),
+      body: Consumer<PestDiseaseNotifier>(
+        builder: (context, provider, child) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Camera section
+                  _buildCameraCard(context, provider),
+                  const SizedBox(height: 16),
 
-              // Detected issues section
-              _buildDetectedIssuesCard(context),
-              const SizedBox(height: 16),
+                  // Loading indicator
+                  if (provider.isLoading) ...[
+                    const Center(
+                      child: Column(
+                        children: [
+                          CircularProgressIndicator(),
+                          SizedBox(height: 8),
+                          Text('Analyzing image...'),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
 
-              // Common pests section
-              _buildCommonPestsCard(context),
-              const SizedBox(height: 16),
+                  // Error message
+                  if (provider.error != null) ...[
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.red.shade50,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.red.shade200),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.error_outline, color: Colors.red.shade700),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              provider.error!,
+                              style: TextStyle(
+                                color: Colors.red.shade700,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
 
-              // Prevention tips
-              _buildPreventionTipsCard(context),
-            ],
-          ),
-        ),
+                  // Detected issues section
+                  _buildDetectedIssuesCard(context, provider),
+                  const SizedBox(height: 16),
+
+                  // Common pests section
+                  _buildCommonPestsCard(context),
+                  const SizedBox(height: 16),
+
+                  // Prevention tips
+                  _buildPreventionTipsCard(context),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
 
-  Widget _buildCameraCard(BuildContext context) {
+  Widget _buildCameraCard(BuildContext context, PestDiseaseNotifier provider) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -103,25 +157,49 @@ class PestDiseaseScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          ElevatedButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.camera_alt_outlined, size: 20),
-            label: const Text('Take Photo'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF3498DB),
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton.icon(
+                  onPressed: () => provider.analyzeImageFromCamera(),
+                  icon: const Icon(Icons.camera_alt_outlined, size: 20),
+                  label: const Text('Take Photo'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF3498DB),
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
               ),
-            ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: ElevatedButton.icon(
+                  onPressed: () => provider.analyzeImageFromGallery(),
+                  icon: const Icon(Icons.image_outlined, size: 20),
+                  label: const Text('From Gallery'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF9B59B6),
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 
-  Widget _buildDetectedIssuesCard(BuildContext context) {
+  Widget _buildDetectedIssuesCard(BuildContext context, PestDiseaseNotifier provider) {
+    final analyses = provider.analyses.isEmpty ? _getDefaultAnalyses() : provider.analyses;
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -146,26 +224,58 @@ class PestDiseaseScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          _buildIssueItem(
-            context,
-            'Aphids',
-            'Small green insects on the leaves',
-            Icons.bug_report_outlined,
-            const Color(0xFFE74C3C),
-            'Moderate',
-          ),
-          const SizedBox(height: 12),
-          _buildIssueItem(
-            context,
-            'Powdery Mildew',
-            'White powdery spots on leaves',
-            Icons.water_drop_outlined,
-            const Color(0xFFF1C40F),
-            'Minor',
-          ),
+          if (analyses.isEmpty)
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.bug_report_outlined,
+                      size: 60,
+                      color: const Color(0xFFBDC3C7),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'No issues detected yet',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: const Color(0xFF7F8C8D),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Take a photo to analyze your plant',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: const Color(0xFF95A5A6),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          else
+            Column(
+              children: [
+                for (int i = 0; i < analyses.length; i++)
+                  _buildIssueItem(
+                    context,
+                    analyses[i].title,
+                    analyses[i].description,
+                    analyses[i].icon,
+                    analyses[i].color,
+                    analyses[i].severity,
+                  ),
+              ],
+            ),
         ],
       ),
     );
+  }
+
+  List<PestDiseaseDisplayItem> _getDefaultAnalyses() {
+    // Return empty list since we want to show the "no issues detected" message
+    // when there are no analyses from the provider
+    return [];
   }
 
   Widget _buildIssueItem(
@@ -178,6 +288,7 @@ class PestDiseaseScreen extends StatelessWidget {
   ) {
     return Container(
       padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
         color: color.withOpacity(0.05),
         borderRadius: BorderRadius.circular(12),
@@ -200,11 +311,13 @@ class PestDiseaseScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      title,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xFF2C3E50),
+                    Expanded(
+                      child: Text(
+                        title,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: const Color(0xFF2C3E50),
+                        ),
                       ),
                     ),
                     Container(
