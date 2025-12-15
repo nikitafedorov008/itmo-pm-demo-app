@@ -1,16 +1,105 @@
-# agromax
+# Agromax
 
-A Demo Agromax MVP Flutter project.
+Agromax - это демонстрационный MVP мобильного приложения для агротехнологий, разработанный на Flutter. Приложение предоставляет комплексные решения для управления сельскохозяйственными процессами, включая картографические функции, геолокацию и интеграцию с ИИ-сервисами.
 
-## Getting Started
+## Особенности
 
-This project is a starting point for a Flutter application.
+- Интерактивная карта с поддержкой геолокации
+- Интеграция с OpenAI для анализа сельскохозяйственных данных
+- Локализация на английском и русском языках
+- Адаптивный пользовательский интерфейс
+- Поддержка различных устройств (мобильные, планшеты)
 
-A few resources to get you started if this is your first Flutter project:
+## Требования
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter SDK: >=3.8.0 <4.0.0
+- Dart SDK: >=3.8.0 <4.0.0
+- Android Gradle Plugin: >=8.9.1
+- Kotlin: >=2.1.0
+- Gradle: >=8.11.1
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Установка и запуск
+
+1. Клонируйте репозиторий:
+```bash
+git clone <ваш_репозиторий>
+cd agromax
+```
+
+2. Установите зависимости:
+```bash
+flutter pub get
+```
+
+3. Сгенерируйте файлы локализации:
+```bash
+flutter gen-l10n
+```
+
+4. Запустите приложение:
+```bash
+flutter run
+```
+
+## Сборка релизной версии
+
+Для сборки релизной версии APK выполните следующую команду:
+
+```bash
+flutter build apk --release --dart-define=PROXYAPI_KEY=<ваш_ключ_API>
+```
+
+Для сборки релизной версии iOS:
+```bash
+flutter build ios --release
+```
+
+## Архитектура проекта
+
+- `/lib/app.dart` - Основной класс приложения
+- `/lib/controllers` - Контроллеры бизнес-логики
+- `/lib/l10n` - Файлы локализации
+- `/lib/models` - Модели данных
+- `/lib/pages` - Виджеты страниц приложения
+- `/lib/providers` - Провайдеры состояний
+- `/lib/services` - Сервисные классы
+
+## Зависимости
+
+- `flutter_map` - Интерактивные карты
+- `latlong2` - Геокоординаты
+- `google_fonts` - Google шрифты
+- `langchain` и `langchain_openai` - Интеграция с OpenAI
+- `http` - HTTP запросы
+- `image_picker` - Выбор изображений
+- `provider` - Управление состоянием
+
+## Локализация
+
+Проект использует встроенную систему локализации Flutter. Поддерживаются следующие языки:
+- Английский (en)
+- Русский (ru)
+
+Файлы локализации находятся в `/lib/l10n/`.
+
+## Конфигурация API
+
+Для работы с API необходим ключ OpenAI. Передайте его через переменную окружения при сборке:
+
+```bash
+flutter build apk --release --dart-define=PROXYAPI_KEY=ваш_ключ_API
+```
+
+## Вклад в развитие проекта
+
+Мы приветствуем вклад в развитие проекта! Пожалуйста, следуйте этим шагам:
+
+1. Сделайте форк проекта
+2. Создайте новую ветку для вашей фичи
+3. Сделайте коммит ваших изменений
+4. Запушьте изменения в ваш форк
+5. Откройте pull request
+
+## Лицензия
+
+Этот проект распространяется как частный демо-проект Agromax.
