@@ -3,6 +3,7 @@ import 'package:agromax/pages/crop_rotation_screen.dart';
 import 'package:agromax/pages/experiments_screen.dart';
 import 'package:agromax/pages/field_details_screen.dart';
 import 'package:agromax/pages/growth_screen.dart';
+import 'package:agromax/pages/login_screen.dart';
 import 'package:agromax/pages/main_dashboard_screen.dart';
 import 'package:agromax/pages/notifications_screen.dart';
 import 'package:agromax/pages/pest_disease_screen.dart';
@@ -45,7 +46,7 @@ class AgroMaxApp extends StatelessWidget {
           showUnselectedLabels: true,
         ),
       ),
-      home: const MainDashboardScreen(),
+      home: const LoginScreen(), // Set login screen as home
       builder: (context, child) => DecoratedBox(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -62,6 +63,7 @@ class AgroMaxApp extends StatelessWidget {
         child: child,
       ),
       routes: {
+        '/login': (context) => const LoginScreen(),
         '/plant-health': (context) => const PlantHealthScreen(),
         '/field-details': (context) => const FieldDetailsScreen(),
         '/subscription': (context) => const SubscriptionScreen(),

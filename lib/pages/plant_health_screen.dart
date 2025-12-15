@@ -308,7 +308,6 @@ class PlantHealthScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
               // Additional weather info
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -333,6 +332,7 @@ class PlantHealthScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: 112),
             ],
           ),
         ),
@@ -372,6 +372,7 @@ class PlantHealthScreen extends StatelessWidget {
             value,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.bold,
+              fontSize: 16,
               color: const Color(0xFF2C3E50),
             ),
           ),
