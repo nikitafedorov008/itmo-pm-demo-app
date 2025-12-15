@@ -17,6 +17,8 @@ import 'package:agromax/pages/weekly_insights_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:agromax/l10n/app_localizations.dart' as l10n;
 
 class AgroMaxApp extends StatelessWidget {
   const AgroMaxApp({super.key});
@@ -24,7 +26,17 @@ class AgroMaxApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'AgroMax Demo',
+      title: 'AgroMax Demo', // Use hardcoded title to avoid initialization issues
+      localizationsDelegates: const [
+        l10n.AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', ''),
+        const Locale('ru', ''),
+      ],
       theme: ThemeData(
         primarySwatch: Colors.green,
         scaffoldBackgroundColor: Colors.transparent, // Changed to transparent for gradient
@@ -81,7 +93,6 @@ class AgroMaxApp extends StatelessWidget {
         '/notifications': (context) => const NotificationsScreen(),
         '/fertilizer-calculator': (context) => const FertilizerCalculatorScreen(),
         '/irrigation-scheduler': (context) => const IrrigationSchedulerScreen(),
-        '/growth': (context) => const GrowthScreen(),
         '/experiments': (context) => const ExperimentsScreen(),
         '/weekly-insights': (context) => const WeeklyInsightsScreen(),
         '/details-field': (context) => const DetailsFieldScreen(),

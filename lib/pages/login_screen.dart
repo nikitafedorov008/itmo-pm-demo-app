@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:agromax/l10n/app_localizations.dart' as l10n;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -49,6 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final s = l10n.AppLocalizations.of(context)!;
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -71,51 +73,59 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 40),
-                  
+
                   // Logo/Title
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 15,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
-                    ),
-                    child: Icon(
-                      Icons.eco_outlined,
-                      size: 80,
-                      color: const Color(0xFF2ECC71),
-                    ),
+                  Image.asset(
+                    'assets/app_logo.png',
+                    fit: BoxFit.contain,
+                    height: 140,
+                    width: 140,
                   ),
-                  
+                  // Container(
+                  //   padding: const EdgeInsets.all(20),
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.white,
+                  //     borderRadius: BorderRadius.circular(20),
+                  //     boxShadow: [
+                  //       BoxShadow(
+                  //         color: Colors.black.withOpacity(0.1),
+                  //         blurRadius: 15,
+                  //         offset: const Offset(0, 5),
+                  //       ),
+                  //     ],
+                  //   ),
+                  //   child: Icon(
+                  //     Icons.eco_outlined,
+                  //     size: 80,
+                  //     color: const Color(0xFF2ECC71),
+                  //   ),
+                  // ),
+
                   const SizedBox(height: 30),
-                  
+
                   Text(
-                    'Welcome to AgroMax',
+                    s.welcomeToAgroMax,
                     style: GoogleFonts.montserrat(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: const Color(0xFF2C3E50),
                     ),
+                    textAlign: TextAlign.center,
                   ),
-                  
+
                   const SizedBox(height: 8),
-                  
+
                   Text(
-                    'Agricultural Management System',
+                    s.agriculturalManagementSystem,
                     style: GoogleFonts.montserrat(
                       fontSize: 16,
                       color: const Color(0xFF7F8C8D),
                     ),
+                    textAlign: TextAlign.center,
                   ),
-                  
+
                   const SizedBox(height: 40),
-                  
+
                   // Login form
                   Container(
                     padding: const EdgeInsets.all(24),
@@ -136,8 +146,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         TextField(
                           controller: _usernameController,
                           decoration: InputDecoration(
-                            labelText: 'Username',
-                            hintText: 'Enter your username',
+                            labelText: s.username,
+                            hintText: s.enterUsername,
                             prefixIcon: const Icon(Icons.person_outline),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -153,21 +163,21 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        
+
                         const SizedBox(height: 16),
-                        
+
                         // Password field
                         TextField(
                           controller: _passwordController,
                           obscureText: _obscurePassword,
                           decoration: InputDecoration(
-                            labelText: 'Password',
-                            hintText: 'Enter your password',
+                            labelText: s.password,
+                            hintText: s.enterPassword,
                             prefixIcon: const Icon(Icons.lock_outline),
                             suffixIcon: IconButton(
                               icon: Icon(
-                                _obscurePassword 
-                                  ? Icons.visibility_outlined 
+                                _obscurePassword
+                                  ? Icons.visibility_outlined
                                   : Icons.visibility_off_outlined,
                               ),
                               onPressed: () {
@@ -190,9 +200,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        
+
                         const SizedBox(height: 8),
-                        
+
                         // Demo credentials hint
                         Container(
                           padding: const EdgeInsets.all(12),
@@ -211,7 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
-                                  'Demo login: demo / demo',
+                                  s.demoCredentials,
                                   style: TextStyle(
                                     fontSize: 12,
                                     color: const Color(0xFFF57F17),
@@ -222,9 +232,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                         ),
-                        
+
                         const SizedBox(height: 24),
-                        
+
                         // Error message
                         if (_errorMessage != null) ...[
                           Container(
@@ -257,7 +267,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const SizedBox(height: 16),
                         ],
-                        
+
                         // Login button
                         SizedBox(
                           width: double.infinity,
@@ -277,8 +287,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     strokeWidth: 2,
                                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                   )
-                                : const Text(
-                                    'Sign In',
+                                : Text(
+                                    s.login,
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
@@ -289,27 +299,47 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
-                  
+
                   const SizedBox(height: 24),
-                  
+
                   // Additional links
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Demo credentials: ',
+                        '${s.demoLogin}: ',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: const Color(0xFF7F8C8D),
                         ),
                       ),
                       Text(
-                        'demo / demo',
+                        s.demoCredentials,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: const Color(0xFF2ECC71),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
+                  ),
+
+                  // Additional links
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 28.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            'ВАЖНО: Это демо приложение, только для показа идей. \nРабочий функционал ограничен распознаванием «Вредители и болезни».',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: const Color(0xFF7F8C8D),
+                              fontSize: 8.4,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
