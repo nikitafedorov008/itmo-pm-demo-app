@@ -94,7 +94,7 @@ class PlantHealthScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '30 days to harvest',
+                          '${30} ${s.daysToHarvest}', // '30 days to harvest',
                           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             fontWeight: FontWeight.w600,
                             color: const Color(0xFF2C3E50),
@@ -153,7 +153,7 @@ class PlantHealthScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Growth Rate',
+                          s.growthRate, // 'Growth Rate',
                           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w600,
                             color: const Color(0xFF2C3E50),
@@ -162,7 +162,7 @@ class PlantHealthScreen extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              'Week',
+                              s.weeklyInsightsTitle, // 'Week',
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: const Color(0xFF3498DB),
                                 fontWeight: FontWeight.w600,
@@ -170,14 +170,14 @@ class PlantHealthScreen extends StatelessWidget {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              'Month',
+                              'Месяц', // s., // 'Month',
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: const Color(0xFF95A5A6),
                               ),
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              'Year',
+                              'Год', // 'Year',
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: const Color(0xFF95A5A6),
                               ),

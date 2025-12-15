@@ -54,7 +54,7 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
-          'Irrigation Scheduler',
+          s.irrigationScheduler, // 'Irrigation Scheduler',
           style: GoogleFonts.montserrat(
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -93,7 +93,7 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Plan Your Irrigation Schedule',
+                      s.planIrrigationSchedule, // 'Plan Your Irrigation Schedule',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: const Color(0xFF2C3E50),
@@ -106,8 +106,8 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                       controller: _areaController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: 'Field Area (hectares)',
-                        hintText: 'Enter field area',
+                        labelText: s.fieldArea, // 'Field Area (hectares)',
+                        hintText: s.enterFieldArea, // 'Enter field area',
                         prefixIcon: const Icon(Icons.area_chart),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -129,8 +129,8 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                     TextField(
                       controller: _cropTypeController,
                       decoration: InputDecoration(
-                        labelText: 'Crop Type',
-                        hintText: 'Enter crop type',
+                        labelText: s.cropType, // 'Crop Type',
+                        hintText: s.cropTypeLabel, // 'Enter crop type',
                         prefixIcon: const Icon(Icons.eco_outlined),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -152,8 +152,8 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                     TextField(
                       controller: _soilTypeController,
                       decoration: InputDecoration(
-                        labelText: 'Soil Type',
-                        hintText: 'Enter soil type',
+                        labelText: s.soilType, // 'Soil Type',
+                        hintText: s.enterSoilType, // 'Enter soil type',
                         prefixIcon: const Icon(Icons.terrain_outlined),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -179,10 +179,10 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                       ),
                       child: DropdownButtonFormField<String>(
                         value: _irrigationMethod,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                          hintText: 'Select irrigation method',
+                          hintText: s.selectIrrigationMethod, // 'Select irrigation method',
                         ),
                         items: [
                           'Drip', 'Sprinkler', 'Furrow', 'Flood'
@@ -203,7 +203,7 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                     ListTile(
                       leading: const Icon(Icons.calendar_today_outlined, color: Color(0xFF3498DB)),
                       title: Text(
-                        _plantingDate.isEmpty ? 'Select Planting Date' : 'Planting Date: $_plantingDate',
+                        _plantingDate.isEmpty ? s.selectPlantingDate /*'Select Planting Date'*/ : '${s.plantingDate}: $_plantingDate',
                         style: TextStyle(
                           color: _plantingDate.isEmpty ? const Color(0xFF7F8C8D) : const Color(0xFF2C3E50),
                           fontSize: 16,
@@ -244,8 +244,8 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                           ),
                           elevation: 0,
                         ),
-                        child: const Text(
-                          'Generate Schedule',
+                        child: Text(
+                          s.generateSchedule, // 'Generate Schedule',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -278,7 +278,7 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Irrigation Requirements',
+                        s.irrigationRequirements, // 'Irrigation Requirements',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: const Color(0xFF2C3E50),
@@ -290,7 +290,7 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                           Expanded(
                             child: _buildMetricCard(
                               context,
-                              title: 'Total Water Needed',
+                              title: s.totalWaterNeeded, // 'Total Water Needed',
                               value: '${(_waterRequirement / 1000).toStringAsFixed(1)} m³',
                               icon: Icons.water_drop_outlined,
                               color: const Color(0xFF3498DB),
@@ -300,7 +300,7 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                           Expanded(
                             child: _buildMetricCard(
                               context,
-                              title: 'Daily Avg.',
+                              title: s.dailyAvg, // 'Daily Avg.',
                               value: '25L/ha',
                               icon: Icons.local_drink_outlined,
                               color: const Color(0xFFF1C40F),
@@ -335,7 +335,7 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Irrigation Schedule',
+                            s.irrigationSchedule, // 'Irrigation Schedule',
                             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: const Color(0xFF2C3E50),
@@ -345,7 +345,7 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                             onPressed: () {
                               // Add functionality to save schedule
                             },
-                            child: const Text('Save Schedule'),
+                            child: Text(s.saveSchedule, /*'Save Schedule'*/),
                           ),
                         ],
                       ),
@@ -406,7 +406,7 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Text(
-                                    'Pending',
+                                    s.pending, // 'Pending',
                                     style: TextStyle(
                                       color: const Color(0xFF2ECC71),
                                       fontSize: 12,
@@ -443,7 +443,7 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Irrigation Tips',
+                      s.irrigationTips, // 'Irrigation Tips',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: const Color(0xFF2C3E50),
@@ -452,16 +452,16 @@ class _IrrigationSchedulerScreenState extends State<IrrigationSchedulerScreen> {
                     const SizedBox(height: 8),
                     _buildTipItem(
                       context,
-                      'Early Morning Watering',
-                      'Water early in the morning to reduce evaporation losses',
+                      s.earlyMorningWatering, // 'Early Morning Watering',
+                      s.earlyMorningWateringDesc, // 'Water early in the morning to reduce evaporation losses',
                       Icons.wb_sunny_outlined,
                       const Color(0xFF3498DB),
                     ),
                     const SizedBox(height: 8),
                     _buildTipItem(
                       context,
-                      'Soil Moisture Monitoring',
-                      'Use soil moisture sensors to optimize irrigation timing',
+                      s.soilMoistureMonitoring, // 'Soil Moisture Monitoring',
+                      s.soilMoistureDesc, //'Use soil moisture sensors to optimize irrigation timing',
                       Icons.terrain_outlined,
                       const Color(0xFF2ECC71),
                     ),

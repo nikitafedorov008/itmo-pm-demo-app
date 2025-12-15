@@ -155,7 +155,7 @@ class _MainDashboardScreenState extends State<MainDashboardScreen> {
             ),
             const SizedBox(height: 4),
             Text(
-              _getLabelForIndex(index),
+              _getLabelForIndex(context, index),
               style: GoogleFonts.montserrat(
                 fontSize: 10,
                 fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
@@ -168,14 +168,15 @@ class _MainDashboardScreenState extends State<MainDashboardScreen> {
     );
   }
 
-  String _getLabelForIndex(int index) {
+  String _getLabelForIndex(BuildContext context, int index) {
+    final s = l10n.AppLocalizations.of(context)!;
     switch (index) {
-      case 0: return 'Home';
-      case 1: return 'Weather';
-      case 2: return 'Plant';
-      case 3: return 'Field';
-      case 4: return 'Tools';
-      default: return 'Home';
+      case 0: return s.home; // 'Home';
+      case 1: return s.weather; // 'Weather';
+      case 2: return s.plant; // 'Plant';
+      case 3: return s.field; // 'Field';
+      case 4: return s.tools; // 'Tools';
+      default: return s.home; // 'Home';
     }
   }
 

@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Field Status',
+                        s.fieldStatus,
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: const Color(0xFF2C3E50),
                           fontWeight: FontWeight.w600,
@@ -165,7 +165,8 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                     ),
                                     child: Text(
-                                      'Vsevolozhsky District, Field #3',
+                                        'Vsevolozhsky District, Field #3',
+                                      // s.location, // Using the location term from localization
                                       style: TextStyle(
                                         color: const Color(0xFF2C3E50),
                                         fontSize: 10,
@@ -182,9 +183,9 @@ class HomeScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              _buildFieldSummaryItem('High', 3, const Color(0xFF2ECC71)),
-                              _buildFieldSummaryItem('Medium', 2, const Color(0xFFF1C40F)),
-                              _buildFieldSummaryItem('Low', 1, const Color(0xFFE74C3C)),
+                              _buildFieldSummaryItem(s.high, /*'High'*/ 3, const Color(0xFF2ECC71)),
+                              _buildFieldSummaryItem(s.medium, /*'Medium',*/ 2, const Color(0xFFF1C40F)),
+                              _buildFieldSummaryItem(s.low, /*'Low',*/ 1, const Color(0xFFE74C3C)),
                             ],
                           ),
                         ],
@@ -195,7 +196,7 @@ class HomeScreen extends StatelessWidget {
               ),
               // Quick access section
               Text(
-                'Quick Access',
+                s.quickAccess, // 'Quick Access',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: const Color(0xFF2C3E50),
                   fontWeight: FontWeight.w600,
@@ -209,7 +210,7 @@ class HomeScreen extends StatelessWidget {
                     _buildQuickAccessCard(
                       context,
                       icon: Icons.map_outlined,
-                      title: 'Details Field',
+                      title: s.fieldDetailsTitle, // 'Details Field',
                       color: const Color(0xFF3498DB),
                       onTap: () {
                         Navigator.pushNamed(context, '/details-field');
@@ -218,7 +219,7 @@ class HomeScreen extends StatelessWidget {
                     _buildQuickAccessCard(
                       context,
                       icon: Icons.auto_graph_outlined,
-                      title: 'Growth',
+                      title: s.growth, // 'Growth',
                       color: const Color(0xFF2ECC71),
                       onTap: () {
                         Navigator.pushNamed(context, '/growth');
@@ -227,7 +228,7 @@ class HomeScreen extends StatelessWidget {
                     _buildQuickAccessCard(
                       context,
                       icon: Icons.science_outlined,
-                      title: 'Experiments',
+                      title: 'Опыты', // s.experiments, // 'Experiments',
                       color: const Color(0xFF9B59B6),
                       onTap: () {
                         Navigator.pushNamed(context, '/experiments');
@@ -236,7 +237,7 @@ class HomeScreen extends StatelessWidget {
                     _buildQuickAccessCard(
                       context,
                       icon: Icons.analytics_outlined,
-                      title: 'Weekly Insights',
+                      title: s.weeklyInsights, // 'Weekly Insights',
                       color: const Color(0xFFF39C12),
                       onTap: () {
                         Navigator.pushNamed(context, '/weekly-insights');
@@ -245,7 +246,7 @@ class HomeScreen extends StatelessWidget {
                     _buildQuickAccessCard(
                       context,
                       icon: Icons.local_florist_outlined,
-                      title: 'Soil Analysis',
+                      title: s.soilAnalysis, // 'Soil Analysis',
                       color: const Color(0xFF9B59B6),
                       onTap: () {
                         Navigator.pushNamed(context, '/soil-analysis');
@@ -254,7 +255,7 @@ class HomeScreen extends StatelessWidget {
                     _buildQuickAccessCard(
                       context,
                       icon: Icons.bug_report_outlined,
-                      title: 'Pest Control',
+                      title: s.pestControl, // 'Pest Control',
                       color: const Color(0xFFE67E22),
                       onTap: () {
                         Navigator.pushNamed(context, '/pest-disease');
@@ -263,7 +264,7 @@ class HomeScreen extends StatelessWidget {
                     _buildQuickAccessCard(
                       context,
                       icon: Icons.rotate_right_outlined,
-                      title: 'Crop Rotation',
+                      title: s.cropRotation, //'Crop Rotation',
                       color: const Color(0xFF1ABC9C),
                       onTap: () {
                         Navigator.pushNamed(context, '/crop-rotation');
@@ -277,7 +278,7 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Recent Activities',
+                    s.recentActivities, // 'Recent Activities',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: const Color(0xFF2C3E50),
                       fontWeight: FontWeight.w600,
@@ -322,7 +323,7 @@ class HomeScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Field Report Updated',
+                                  s.fieldReportUpdated, // 'Field Report Updated',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge
@@ -333,7 +334,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  'Updated NDVI analysis for Field #3',
+                                  s.updatedNDVIAnalysis, // 'Updated NDVI analysis for Field #3',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall
@@ -345,7 +346,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             const Spacer(),
                             Text(
-                              '2h ago',
+                              '2ч назад', // '2h ago',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall
@@ -383,7 +384,7 @@ class HomeScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Weather Alert',
+                                  s.weatherAlert, // 'Weather Alert',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge
@@ -394,7 +395,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  'Heavy rain expected tomorrow',
+                                  s.heavyRainExpected, // 'Heavy rain expected tomorrow',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall
@@ -406,7 +407,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             const Spacer(),
                             Text(
-                              '5h ago',
+                              '5ч назад', // '5h ago',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall
@@ -422,7 +423,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               Text(
-                'Agricultural Tools',
+                s.agriculturalTools, // 'Agricultural Tools',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: const Color(0xFF2C3E50),
                   fontWeight: FontWeight.w600,
@@ -431,8 +432,8 @@ class HomeScreen extends StatelessWidget {
               // Soil Analysis Card
               _buildFeatureCard(
                 context,
-                title: 'Soil Analysis',
-                subtitle: 'Analyze soil composition and nutrients',
+                title: s.soilAnalysisActionTitle, // 'Soil Analysis',
+                subtitle: s.soilAnalysisAction, // 'Analyze soil composition and nutrients',
                 icon: Icons.local_florist_outlined,
                 color: const Color(0xFF9B59B6),
                 onTap: () {
@@ -442,8 +443,8 @@ class HomeScreen extends StatelessWidget {
               // Pest & Disease Card
               _buildFeatureCard(
                 context,
-                title: 'Pest & Disease',
-                subtitle: 'Detect and manage crop pests',
+                title: s.pestDisease, // 'Pest & Disease',
+                subtitle: s.detectManageCropPests, // 'Detect and manage crop pests',
                 icon: Icons.bug_report_outlined,
                 color: const Color(0xFFE67E22),
                 onTap: () {
@@ -453,8 +454,8 @@ class HomeScreen extends StatelessWidget {
               // Crop Rotation Card
               _buildFeatureCard(
                 context,
-                title: 'Crop Rotation',
-                subtitle: 'Plan sustainable crop rotation',
+                title: s.cropRotation, // 'Crop Rotation',
+                subtitle: s.planSustainableCropRotation, // 'Plan sustainable crop rotation',
                 icon: Icons.rotate_right_outlined,
                 color: const Color(0xFF1ABC9C),
                 onTap: () {
@@ -464,8 +465,8 @@ class HomeScreen extends StatelessWidget {
               // Fertilizer Calculator Card
               _buildFeatureCard(
                 context,
-                title: 'Fertilizer Calculator',
-                subtitle: 'Calculate optimal fertilizer amounts',
+                title: s.fertilizerCalculator, // 'Fertilizer Calculator',
+                subtitle: s.calculateOptimalFertilizerAmounts, // 'Calculate optimal fertilizer amounts',
                 icon: Icons.calculate_outlined,
                 color: const Color(0xFF3498DB),
                 onTap: () {
@@ -475,8 +476,8 @@ class HomeScreen extends StatelessWidget {
               // Irrigation Scheduler Card
               _buildFeatureCard(
                 context,
-                title: 'Irrigation Scheduler',
-                subtitle: 'Plan and manage irrigation schedules',
+                title: s.irrigationScheduler, // 'Irrigation Scheduler',
+                subtitle: s.planManageIrrigationSchedules, // 'Plan and manage irrigation schedules',
                 icon: Icons.water_drop_outlined,
                 color: const Color(0xFF2ECC71),
                 onTap: () {
