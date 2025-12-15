@@ -89,35 +89,67 @@ class _FieldDetailsScreenState extends State<FieldDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent, // Make scaffold transparent
       appBar: AppBar(
         backgroundColor: Colors.transparent, // Make app bar transparent
-        centerTitle: true,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildLegendItem(context, 'High', const Color(0xFF2ECC71)),
-                _buildLegendItem(context, 'Medium', const Color(0xFFF1C40F)),
-                _buildLegendItem(context, 'Low', const Color(0xFFE74C3C)),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Vsevolozhsky District, Agrofirm "Vyborgets"',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.grey.shade600,
-                fontSize: 12,
-              ),
-            ),
-          ],
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
+        title: Text(
+          'Field Details',
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: const Color(0xFF2C3E50),
+          ),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Column(
         children: [
+          // Legend header
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildLegendItem(context, 'High', const Color(0xFF2ECC71)),
+                    _buildLegendItem(context, 'Medium', const Color(0xFFF1C40F)),
+                    _buildLegendItem(context, 'Low', const Color(0xFFE74C3C)),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Vsevolozhsky District, Agrofirm "Vyborgets"',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Colors.grey.shade600,
+                    fontSize: 12,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
           // Карта с полигонами
           Expanded(
             child: FlutterMap(

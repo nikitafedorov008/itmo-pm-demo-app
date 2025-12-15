@@ -1,3 +1,4 @@
+import 'package:agromax/controllers/dashboard_tab_notifier.dart';
 import 'package:agromax/pages/agricultural_dashboard_screen.dart';
 import 'package:agromax/pages/experiments_screen.dart';
 import 'package:agromax/pages/field_details_screen.dart';
@@ -30,16 +31,20 @@ class _MainDashboardScreenState extends State<MainDashboardScreen> {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
+        centerTitle: false,
         title: const Text('AgroMax'),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {},
+            onPressed: () {
+              // Navigate to the Notifications screen using the route
+              Navigator.pushNamed(context, '/notifications');
+            },
           ),
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.search),
+          //   onPressed: () {},
+          // ),
         ],
         backgroundColor: Colors.transparent, // Keep app bar transparent over gradient
       ),

@@ -4,6 +4,7 @@ import 'package:agromax/pages/experiments_screen.dart';
 import 'package:agromax/pages/field_details_screen.dart';
 import 'package:agromax/pages/growth_screen.dart';
 import 'package:agromax/pages/main_dashboard_screen.dart';
+import 'package:agromax/pages/notifications_screen.dart';
 import 'package:agromax/pages/pest_disease_screen.dart';
 import 'package:agromax/pages/plant_health_screen.dart';
 import 'package:agromax/pages/soil_analysis_screen.dart';
@@ -71,6 +72,7 @@ class AgroMaxApp extends StatelessWidget {
         '/pest-disease': (context) => const PestDiseaseScreen(),
         '/crop-rotation': (context) => const CropRotationScreen(),
         '/agricultural-dashboard': (context) => const AgriculturalDashboardScreen(),
+        '/notifications': (context) => const NotificationsScreen(),
       },
     );
   }
